@@ -58,9 +58,9 @@
 			<a href="index.php"><img src="<?php echo get_template_directory_uri(); ?>/images/hacknjill-logo.png" title="Hack'n Jill" alt="Hack'n Jill" /></a>
 		</div>
 		<div class="main-nav tencol last">
-			<nav class="menu-main-navigation-container">
-			 <?php wp_nav_menu( $args ); ?>
-			 </nav>
+			<nav id="mainmenu">
+				 <?php wp_nav_menu(); ?>
+			</nav>
 		</div>
 	</div>
 </div>
