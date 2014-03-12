@@ -81,146 +81,32 @@ function versioned_resource($relative_url){
   return $relative_url.$file_version;
 }
 
-// Portfolio CCT
-//THESE ARE FUNCTIONS TO PRODUCE THE "PIECE" CONTENT TYPE FOR THE portfolio MANAGER
-add_action('init', 'portfolio_register');
-function portfolio_register() {
- 	//CREATE AN ARRAY OF TERMS THAT WILL CONTROL THE LANGUAGE ON THE ADMIN INTERFACE IN OUR NEW CCT
-	$labels = array(
-		'name' => _x('Pieces', 'post type general name'),
-		'singular_name' => _x('Piece', 'post type singular name'),
-		'add_new' => _x('Add New Piece', 'portfolio item'),
-		'add_new_item' => __('Add New Piece'),
-		'edit_item' => __('Edit Piece'),
-		'new_item' => __('New Piece'),
-		'view_item' => __('View Piece'),
-		'search_items' => __('Search Piece'),
-		'not_found' =>  __('Nothing found'),
-		'not_found_in_trash' => __('Nothing found in Trash'),
-		'parent_item_colon' => ''
-	);
- 
- 	//CREATE AN ARRAY OF ARGUMENTS THAT WILL CUSTOMIZE OUR NEW CCT
-	//"entry" signifies what will go in the url
-	$args = array(
-		'labels' => $labels,
-		'public' => true,
-		'publicly_queryable' => true,
-		'show_ui' => true,
-		'query_var' => true,
-		'with_front' => true,
-		'capability_type' => 'post',
-		'hierarchical' => true,
-		'menu_position' => null,
-		'taxonomies' => array('post_tag'),
-		'supports' => array('title', 'thumbnail', 'editor')
-	  ); 
- 
- 	//REGISTER THE POST TYPE WITH WORDPRESS
-	register_post_type('portfolio',$args);
 
-	//REGISTER THE TAXONOMY WE WISH TO USE
-	//skills is the name of the taxonomy
-	register_taxonomy('skills','portfolio',array(
-		'hierarchical' => true,
-		'label' => 'Skills',
-		'show_ui' => true,
-		'query_var' => true,
-		'rewrite' => array( 'slug' => 'skill' ),
-	));
+// INCLUDE ALL OF THE CUSTOM CONTENT TYPE META INFORMATION
+include 'metaboxes.php';
 
-}
-add_action("admin_init", "admin_init");
-
-function admin_init(){
-	add_meta_box("portfolioentry_meta", "Portfolio Details", "portfolio_meta", "portfolio", "normal", "low");
-}
-
-function portfolio_meta() {
-  global $post;
-  $custom = get_post_custom($post->ID);
-  $url = $custom["portfolio_url"][0];
-  $projectdate = $custom["portfolio_date"][0];
-  $client = $custom["portfolio_client"][0];
-  $skillsused = $custom["portfolio_skillsused"][0];
-  $clientpage = $custom["portfolio_clientpage"][0];
-  $importance = $custom["portfolio_importance"][0];
-  ?>
-	<style type='text/css'>
-		#portfolio_form_container {overflow: auto;}
-		#shortanswers {width:50%;float: left;}
-		#longanswers {width:49%;margin-left: 50%;}
-		#portfolio_form_container input, textarea {
-			border-width:1px;border-style:solid;-moz-border-radius:4px;-khtml-border-radius:4px;-webkit-border-radius:4px;border-radius:4px;
-			border-color: #e5e5e5;}
-	</style>  
-	<div id='portfolio_form_container'>
-	
-		<div id='shortanswers'>
-			<p><label>Project URL</label><br />
-			<input name="portfolio_url" value="<?php echo $url; ?>"></p>
-			<p><label>Date Created</label><br />
-			<input name="portfolio_date" value="<?php echo $projectdate; ?>"></p>
-			<p><label>Client or Class</label><br />
-			<input name="portfolio_client" value="<?php echo $client; ?>"></p>
-			<p><label>Client/Class Website</label><br />
-			<input name="portfolio_clientpage" value="<?php echo $clientpage; ?>"></p>
-			<p><label>Importance</label><br />
-			<input name="portfolio_importance" value="<?php echo $importance; ?>"></p>
-			<p><label>Skills I Used</label></p><br />
-			<textarea cols="80" rows="2" name="portfolio_skillsused"><?php echo $skillsused; ?></textarea>
-		</div>
-	</div>
-  
-  <?php
-}
-
-add_action('save_post', 'save_details');
-
-function save_details(){
-  global $post;
- 
-  update_post_meta($post->ID, "portfolio_url", $_POST["portfolio_url"]);
-  update_post_meta($post->ID, "portfolio_date", $_POST["portfolio_date"]);
-  update_post_meta($post->ID, "portfolio_client", $_POST["portfolio_client"]);
-  update_post_meta($post->ID, "portfolio_skillsused", $_POST["portfolio_skillsused"]);
-  update_post_meta($post->ID, "portfolio_clientpage", $_POST["portfolio_clientpage"]);
-  update_post_meta($post->ID, "portfolio_importance", $_POST["portfolio_importance"]);
-
-}
 
 //THIS BLOCK REGISTERS THE COLUMNS YOU WANT TO USE IN ADMIN WINDOW FOR THE CONTENT TYPE
-add_filter('manage_edit-portfolio_columns', 'add_portfolio_columns');
+add_filter('manage_edit-events_columns', 'add_events_columns');
 
-function add_portfolio_columns($gallery_columns) {
+function add_events_columns($gallery_columns) {
 	$new_columns['cb'] = '<input type="checkbox" />';
-	$new_columns['title'] = _x('Project Title', 'column name');
-	$new_columns['client'] = __('Client Name');
+	$new_columns['title'] = _x('Event Name', 'column name');
 	$new_columns['date'] = __('Date');
-	$new_columns['skills'] = __('Skills');
-	$new_columns['importance'] = __('Importance ');
 	return $new_columns;
 }
 
 //THIS BLOCK SORTS THROUGH THE CUSTOM COLUMNS YOU INDICATED AND DOES SPECIAL THINGS ACCORDINGLY
 
-add_action('manage_portfolio_posts_custom_column', 'manage_portfolio_columns', 10, 2);
+add_action('manage_events_posts_custom_column', 'manage_events_columns', 10, 2);
 
-function manage_portfolio_columns($column_name, $id) {
+function manage_events_columns($column_name, $id) {
 	global $post;
 	switch ($column_name) {
-		case 'client':
-			echo get_post_meta( $post->ID , 'portfolio_client' , true ); 
-			break;
 		case 'date':
-			echo get_post_meta( $post->ID , 'portfolio_date' , true ); 
-			break;
-		case 'skills':
-			echo get_the_term_list($post->ID, 'skills', '', ', ','');
-			break;
-		case 'importance':
-			echo get_post_meta($post->ID, 'portfolio_importance', true);
+			echo get_post_meta( $post->ID , 'events_date' , true ); 
 			break;
 		default: break;
 	} 
 }
+?>
