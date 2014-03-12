@@ -7,14 +7,12 @@
 get_header(); ?>
 <div id="main" role="main">
 	<div class="row">
-		<div class="container">
-			<div class="onecol"></div>
-			<div class="tencol">
+		<header class="pageheader">
+			<h1><?php the_title(); ?></h1>
+		</header>
+		<div class="eightcol">
 				<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 				<article class="post" id="post-<?php the_ID(); ?>">
-					<header>
-						<h2><?php the_title(); ?></h2>
-					</header>
   
 					<?php the_content('<p class="serif">Read the rest of this page &raquo;</p>'); ?>
 
@@ -23,9 +21,8 @@ get_header(); ?>
 				</article>
 				<?php endwhile; endif; ?>
 				<?php edit_post_link('Edit this entry.', '<p>', '</p>'); ?>
-			</div>
-			<div class="onecol last"></div>
 		</div>
+		<div class="fourcol last"><?php get_sidebar(); ?></div>
 	</div>
 </div>
 

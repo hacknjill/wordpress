@@ -12,7 +12,6 @@ get_header(); ?>
    <p</p>
  </div>
  <div class="tencol">
-
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
   <article <?php post_class() ?> id="post-<?php the_ID(); ?>">
@@ -31,19 +30,6 @@ get_header(); ?>
       <?php if ( comments_open() && pings_open() ) {
         // Both Comments and Pings are open ?>
         You can <a href="#respond">leave a response</a>, or <a href="<?php trackback_url(); ?>" rel="trackback">trackback</a> from your own site.
-
-      <?php } elseif ( !comments_open() && pings_open() ) {
-        // Only Pings are Open ?>
-        Responses are currently closed.
-
-      <?php } elseif ( comments_open() && !pings_open() ) {
-        // Comments are open, Pings are not ?>
-        You can skip to the end and leave a response. Pinging is currently not allowed.
-
-      <?php } elseif ( !comments_open() && !pings_open() ) {
-        // Neither Comments, nor Pings are open ?>
-        Both comments and pings are currently closed.
-
       <?php } edit_post_link('Edit this entry','','.'); ?>
       </p>
     </div>
