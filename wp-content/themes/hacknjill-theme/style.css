@@ -55,7 +55,7 @@ h2, h3, h4, h5, h6, h7 {
 	font-style: normal; 
 }
 
-ul {margin:0 0 0 36px;}
+ul {margin:0 0 10px 36px;}
 
 .widgettitle {margin:0 0 16px 0; }
 
@@ -73,8 +73,8 @@ a:hover, a:active {
 	cursor:pointer;
 }
 
-.pageheader {margin:20px 0;}
-.pageheader h1 {font-size:3em;}
+.pageheader {margin:20px 0; text-align:center;}
+.pageheader h1 {font-size:3em; line-height:1.3em;}
 
 /************* Navigation *************/
 .logo img {padding-top:10px;}
@@ -123,7 +123,6 @@ a:hover, a:active {
   display: block;
 }
 #mainmenu > .menu-home-menu-container > ul li.menu-item-has-children ul {
-  display: none;
   width: 250px;
   position: fixed;
   margin: 0;
@@ -158,6 +157,7 @@ a:hover, a:active {
   text-shadow: 0px 1px 0px #e6f2ff;
 }
 @media (max-width: 600px) {
+#mainmenu {float:left;}
   #mainmenu  > .menu-home-menu-container > ul {
     width: 100%;
   }
@@ -173,7 +173,8 @@ a:hover, a:active {
     background-position: 95% 135%;
   }
   #mainmenu  > .menu-home-menu-container > ul li {
-    display: none;
+    display: block;
+    width:100%;
   }
   #mainmenu  > .menu-home-menu-container > ul li.right {
     float: none;
@@ -195,20 +196,6 @@ a:hover, a:active {
     display: block;
     padding-left: 24px;
   }
-  #mainmenu  > .menu-home-menu-container > ul li.menu-item-has-children > a {
-    background-image: none;
-  }
-}
-/* Make sure they show even if hidden in mobile view by JS */
-@media (min-width: 600px) {
-  #mainmenu  > .menu-home-menu-container > ul > li.collapsed {
-    display: inline-block !important;
-    *display: inline;
-    zoom: 1;
-  }
-  #mainmenu  > .menu-home-menu-container > ul ul li.collapsed {
-    display: block !important;
-  }
 }
 
 /******** FOOTER *******/
@@ -229,6 +216,7 @@ padding:0 10px;
 footer .menu-home-menu-container a {text-decoration:none;}
 
 /************* HOME *************/
+.home #main {padding-bottom:40px;}
 #homebanner {
 	background:url('images/hacknjill-header.jpg') no-repeat top fixed;
 	-webkit-background-size: cover;
@@ -237,18 +225,54 @@ footer .menu-home-menu-container a {text-decoration:none;}
 	 background-size: cover;
 	color:#fff;
 	text-align:center;
-	height:400px;
+	min-height:500px;
 }
 
-.mission {font-size:3.8em; padding-top:30px;}
+.mission {font-size:3.7em; padding-top:90px; line-height:1.3em;}
+
+.signupform {margin:20px auto; padding:20px 0; text-align:center; width:50%;}
+
+.gform_wrapper {max-width:100% !important; margin:0;}
+.gform_wrapper .top_label .gfield_label {display:none !important;}
+.signupform input[type="submit"] { background:#1575e0; padding:10px; min-width:180px; color:#fff; font-weight:bold; font-family: 'Montserrat'; border:none; width:100%;}
+.signupform .gform_wrapper .gform_footer {padding:0; width:40%; margin-left:3%; display:inline-block;}
+.signupform .gform_body {width:55%; display:inline-block;}
+
+.gform_wrapper input[type=text], .gform_wrapper input[type=email] {width:100% !important; padding:12px 2px !important; border:none;}
+
 .quotes {text-align:center; font-size:1.4em;}
-.maincallout {font-size:2.2em;}
-.press {margin-top:40px;}
-.press h2 {text-align:center;}
+.maincallout {font-size:2em; line-height:1.2em;}
+.mainauthor {margin-bottom:30px;}
+.press {margin:100px 0;}
+.press h2 {text-align:center; margin-bottom:30px;}
+
+.latesthacks {text-align:center; margin:30px auto 60px auto;}
+.latesthacks h2 {font-size:3.6em; line-height:1.3em;}
+.latesthacks .eventdescription {padding-bottom:20px;}
+#eventdescription h2 {text-align:center;}
+
+.latesthacks .button {text-decoration:none; padding:8px 20px; min-width:200px; background-color:#f7d122; color:#fff; margin: 0 10px;}
+.latesthacks .inactivebutton {text-decoration:none; padding:8px 20px; min-width:200px; background-color:#999999; color:#fff; margin: 0 10px;}
+
+.thirds {width:25%; margin:0 2%; padding: 0 2%; text-align:center; float:left;}
+.pasthacks {margin-bottom:60px; display:block;}
+.press h2, .twitter h2 {font-size:2.6em; line-height:1.3em;}
+.home h3 {26px;}
+
+/***** TEAM ***********/
+.teambio {width:45%; padding:0 4% 20px 0; float:left;}
+@media (max-width:540px) {
+	.teambio {width:95%; padding:0 4% 20px 0; float:none;}
+	}
+}
 
 /************* BLOG *************/
 .newer {float:right; width:200px; padding:0 20px 0 0;}
 .older {float:left; width:200px; padding:0 20px 0 0;}
+.blog header {margin-bottom:14px;}
+.socialwidget {margin:0 20px 20px 0;}
+.blogcomments {margin-bottom:20px; padding:20px 0;}
+.eightcol article {padding:0 6px;}
 
 /************* Video Responsive Design *************/
 .videoWrapper {
@@ -282,11 +306,18 @@ footer .menu-home-menu-container a {text-decoration:none;}
 	margin-bottom:40px;
 	padding:0;
 	text-shadow: 0 0 10px #000;}
-.eventheader h1 {margin-top:75px; font-size: 2.8em;}
+.eventheader a, .eventheader a:active, .eventheader a:visited, .eventheader a:hover  {text-decoration:none; color:#fff;}
+.eventheader h1 {padding-top:75px; font-size: 2.8em;}
 .quote {padding: 60px 0 0 0;}
 .quote .author {text-align: right;}
 .recaps h2, .overallwinners h2 {text-align: center;}
 .recap {margin:0;}
+
+.photogallery img {max-height:200px; display:inline-block; margin:0 1%;}
+.photogallery {margin:50px auto; height:200px; overflow:hidden; text-align:center;}
+@media (max-width: 420px) {
+.photogallery img {max-height:99px; margin:0 5px 2px 0;}
+}
 
 .winnerdescription {max-height: 200px;}
 .winnerscreenshot {
@@ -294,20 +325,26 @@ footer .menu-home-menu-container a {text-decoration:none;}
 	overflow: hidden;
 	position: relative;
 }
-.apiwinners, .eventhost, .sponsors {text-align: center; margin-left: auto; margin-right: auto;}
+.apiwinners, .eventhost, .sponsors, .presentations {text-align: center; margin-left: auto; margin-right: auto;}
+
+.hostlogo {max-width:250px; margin:0 auto;}
+
+.presentation {margin:0 auto 30px auto;}
 
 .judgeimage {
 	max-height: 220px;
+	max-width:220px;
 	overflow: hidden;
 	position: relative;
+	margin-bottom:10px;
+	margin:0 auto;
 }
-.judgebutton {background-color: #d9d067; padding:10px; display: block; text-align: center; margin: 0 auto; font-weight: bold; color:#fff; text-decoration: none;}
+.judgebutton {background-color: #d9d067; border:none; padding:10px; display: block; text-align: center; margin: 0 auto; font-weight: bold; color:#fff; text-decoration: none; margin-bottom:20px;}
 .judgebutton:visited, .judgebutton:hover {color: #fff;}
 
-.judgeimage {float: left; margin: 0 10px 10px 0;}
+#element_to_pop_up  > .judgeimage, #element_to_pop_up2  > .judgeimage, #element_to_pop_up3  > .judgeimage, #judge_to_pop_up4 > .judgeimage {float: left; margin: 0 10px 10px 0;}
 
 .judgeoverlay {padding: 20px; background-color: #d9d067; display: block; margin: 10px auto; width: 80%;}
-
 
 #element_to_pop_up, #element_to_pop_up2, #element_to_pop_up3, #judge_to_pop_up4 { 
     background-color:#d9d067;
@@ -316,6 +353,7 @@ footer .menu-home-menu-container a {text-decoration:none;}
     min-width:400px;
     min-height: 180px;
     width: 80%;
+    max-width:1000px;
     left:10%;
 }
 .b-close{
@@ -326,3 +364,40 @@ footer .menu-home-menu-container a {text-decoration:none;}
     text-decoration: none;
     color: #000;
 }
+
+@media (max-width:770px) { .judge {text-align:center; margin:0 auto;}}
+@media (max-width:420px) {
+	.judgebutton {display:none;}
+	#element_to_pop_up, #element_to_pop_up2, #element_to_pop_up3, #judge_to_pop_up4  {
+		display:inline;
+		background:none;
+	}
+	#element_to_pop_up  > .judgeimage, #element_to_pop_up2  > .judgeimage, #element_to_pop_up3  > .judgeimage, #judge_to_pop_up4 > .judgeimage {display:none;}
+	#element_to_pop_up  > h2, #element_to_pop_up2  > h2, #element_to_pop_up3  > h2, #judge_to_pop_up4 > h2 {display:none;}
+	.gototop {display:none;}
+}
+
+/****** HACKATHON AND EVENTS INDEX PAGE ********/
+
+.eventdetails {width:70%; margin:0 auto; margin-bottom:55px;}
+
+
+/*  TWITTER STYLES */
+.twitter {width:70%; margin:100px auto; text-align:center;}
+.twitter ul li {
+  list-style:none;
+  overflow:hidden;
+  margin:0 auto;
+  padding:5px;
+  width:80%;
+}
+
+.user {display:none;}
+
+.tweet {width:100%; margin-bottom:.3em; }
+
+.interact a {
+  margin-left:5px;
+}
+
+.tweetmetadata {}

@@ -11,7 +11,7 @@ get_header(); ?>
 	</header>
 	<div class="eightcol">
 		<?php query_posts($query_string); ?>
-		<?php if (have_posts()) : while (have_posts()) : the_post(); if( $post->ID == $do_not_duplicate ) continue;?>
+		<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
       		<article <?php post_class() ?> id="post-<?php the_ID(); ?>">
 		<header>

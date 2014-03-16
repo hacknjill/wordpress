@@ -7,10 +7,11 @@
 get_header(); ?>
 <div id="main" role="main">
 	<div class="row">
-		<header class="pageheader">
-			<h1><?php the_title(); ?></h1>
-		</header>
-		<div class="eightcol">
+		<div class="onecol"></div>
+		<div class="tencol">
+			<header class="pageheader">
+				<h1><?php the_title(); ?></h1>
+			</header>
 				<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 				<article class="post" id="post-<?php the_ID(); ?>">
   
@@ -20,9 +21,8 @@ get_header(); ?>
   
 				</article>
 				<?php endwhile; endif; ?>
-				<?php edit_post_link('Edit this entry.', '<p>', '</p>'); ?>
 		</div>
-		<div class="fourcol last"><?php get_sidebar(); ?></div>
+		<div class="onecol last"></div>
 	</div>
 </div>
 
