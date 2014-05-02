@@ -28,10 +28,14 @@ get_header(); ?>
 		<div class="twocol"></div>
 		<div id="eventdescription" class="eightcol">
 			<h2>About <?php echo get_the_title(); ?></h2>
-			<?php the_field('eventdescription'); ?>
+			<?php if (get_field('eventdescription')) {
+				the_field('eventdescription');
+			} else {
+				echo "<div style='text-align:center; margin-top:12px;'><p>Our next event is in the works!</p><p>Be sure to follow us on <a href='http://www.twitter.com/hacknjill' target='_blank'>Twitter</a> to get the latest information.</p></div>";
+			} ?>
 			<?php if (get_field('rules')) {
 				echo '<h2>The Rules</h2>';
-				}else {} ?>
+			} else {} ?>
 
 			<?php the_field('rules'); ?>
 		</div>
@@ -447,7 +451,10 @@ get_header(); ?>
 			<div class="judgeimage"><img src="<?php echo the_field('1_judge_image'); ?>" /></div>
 			<h3><?php the_field('1_judge_name'); ?></h3>
 			<p><?php the_field('1_judge_job'); ?></p>
-			<button id="my-button" class="judgebutton">Learn More</button>
+			<?php if (get_field('1_judge_name')) {
+				echo '<button id="my-button" class="judgebutton">Learn More</button>';
+				} else {}
+			?>
 			<div id="element_to_pop_up">
 				<a class="b-close">x</a>
 				<div class="judgeimage"><img src="<?php echo the_field('1_judge_image'); ?>" /></div>
@@ -469,7 +476,10 @@ get_header(); ?>
 			<div class="judgeimage"><img src="<?php echo the_field('2_judge_image'); ?>" /></div>
 			<h3><?php the_field('2_judge_name'); ?></h3>
 			<p><?php the_field('2_judge_job'); ?></p>
-			<button id="my-button2" class="judgebutton">Learn More</button>
+			<?php if (get_field('1_judge_name')) {
+				echo '<button id="my-button2" class="judgebutton">Learn More</button>';
+				} else {}
+			?>
 
 			<div id="element_to_pop_up2">
 				<a class="b-close">x</a>
@@ -492,7 +502,10 @@ get_header(); ?>
 			<div class="judgeimage"><img src="<?php echo the_field('3_judge_image'); ?>" /></div>
 			<h3><?php the_field('3_judge_name'); ?></h3>
 			<p><?php the_field('3_judge_job'); ?></p>
-			<button id="my-button3" class="judgebutton">Learn More</button>
+			<?php if (get_field('1_judge_name')) {
+				echo '<button id="my-button3" class="judgebutton">Learn More</button>';
+				} else {}
+			?>
 
 			<div id="element_to_pop_up3">
 				<a class="b-close">x</a>
@@ -515,7 +528,11 @@ get_header(); ?>
 			<div class="judgeimage"><img src="<?php echo the_field('4_judge_image'); ?>" /></div>
 			<h3><?php the_field('4_judge_name'); ?></h3>
 			<p><?php the_field('4_judge_job'); ?></p>
-			<button id="judge-button4" class="judgebutton">Learn More</button><!-- Button that triggers the popup -->
+			<?php if (get_field('1_judge_name')) {
+				echo '<button id="judge-button4" class="judgebutton">Learn More</button>';
+				} else {}
+			?>
+			<!-- Button that triggers the popup -->
 
 			<div id="judge_to_pop_up4">
 			<a class="b-close">x</a>

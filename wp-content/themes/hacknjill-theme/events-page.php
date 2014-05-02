@@ -15,8 +15,7 @@ get_header(); ?>
         			'nopaging' => true,
     			);
     			$the_query = new WP_Query( $args );         
-   			 while ( $the_query->have_posts() ) :
-   			 $the_query->the_post();
+   			while ( $the_query->have_posts() ) : $the_query->the_post();
    		?>
 			<!--Get Events -->
 			<div class="eventdetails">
@@ -25,7 +24,21 @@ get_header(); ?>
 					<h2><?php the_field('eventdate'); ?> | <?php the_field('eventlocation'); ?></h2>
 				</header>
 				<?php the_field('eventdescription'); ?>
-				<p><a href="<?php echo get_permalink($post->ID); ?>">See recaps, photos and more about <?php echo get_the_title(); ?></a>
+
+				<?php if (get_field('1_recap_title')) {
+					echo '<p>See recaps, photos and more about <a href="';
+					the_permalink($post->ID);
+					echo '">';
+					the_title();
+					echo '</a>.</p>';
+				} else {
+					echo '<p>Learn more about our event, <a href="';
+					the_permalink($post->ID);
+					echo '">';
+					the_title();
+					echo '</a>.</p>';
+				}
+				?>
 			</div>
 		
 			<?php endwhile; wp_reset_postdata(); ?>

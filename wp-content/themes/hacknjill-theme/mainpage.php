@@ -39,7 +39,12 @@ get_header(); ?>
 					echo '<span class="inactivebutton">Sign Up Coming Soon</span>';
 					}
 				?>
-				<a href="<?php the_permalink(); ?>" class="button">Learn More</a>
+				<?php if (get_field('eventdescription')) {
+					echo '<a target="_blank" href="'; 
+					the_permalink();
+					echo '" class="button">Learn More</a>';
+					} else { }
+				?>
 			</div>
 			<div class="twocol last"></div>
 			<div class="clear"></div>
@@ -48,7 +53,7 @@ get_header(); ?>
 			<div class="pasthacks">
 			<?php
 			//WordPress loop for custom post type
- 			$my_query = new WP_Query('post_type=events&posts_per_page=3');
+ 			$my_query = new WP_Query('post_type=events&posts_per_page=3&offset=1');
       			while ($my_query->have_posts()) : $my_query->the_post(); ?>
 			<div class="thirds">
 				<h3><?php the_title(); ?></h3>
